@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32901.82
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthomSwitch", "AthomSwitch\AthomSwitch.csproj", "{8E575E01-0D3A-4DE5-A6B7-0E4ECEBC1832}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E575E01-0D3A-4DE5-A6B7-0E4ECEBC1832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E575E01-0D3A-4DE5-A6B7-0E4ECEBC1832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E575E01-0D3A-4DE5-A6B7-0E4ECEBC1832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E575E01-0D3A-4DE5-A6B7-0E4ECEBC1832}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B1F1F30-D99E-4EB4-BCD1-C5BA944491E6}
+	EndGlobalSection
+EndGlobal
