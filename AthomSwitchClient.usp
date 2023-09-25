@@ -1,0 +1,90 @@
+#PRINT_TO_TRACE
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+#includepath "C:\\Users\\01668698\\source\\repos\\AthomSwitch\\AthomSwitch\\bin\\Debug"
+#USER_SIMPLSHARP_LIBRARY "AthomSwitch"
+
+STRING_PARAMETER mqttHost[100];
+INTEGER_PARAMETER mqttPort;
+STRING_PARAMETER mqttClientId[100];
+STRING_PARAMETER username[100];
+STRING_PARAMETER password[100];
+STRING_PARAMETER topic[100];
+
+DIGITAL_INPUT _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_,_SKIP_, connect;
+DIGITAL_INPUT powerOn;
+DIGITAL_INPUT powerOff;
+DIGITAL_INPUT toggle;
+
+// 0: Not connected, 1: connected, 2, disconnected, 3: failed to connect (error)
+DIGITAL_OUTPUT _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_, _SKIP_,_SKIP_, power, onlineStatus;
+ANALOG_OUTPUT mqttStatus; 
+
+AthomSwitchClient client;
+
+PUSH connect
+{
+	client.Connect();
+}
+
+RELEASE connect
+{
+	client.Disconnect();
+}
+
+PUSH powerOn
+{
+	client.PowerOn();
+}
+
+PUSH powerOff
+{
+	client.PowerOff();
+}
+
+PUSH toggle
+{
+	client.Toggle();
+}
+
+CALLBACK function PowerStateChangedHandler(INTEGER state)
+{
+	if (state = 1)
+	{
+		power = 1;
+	}
+	else
+	{
+		power = 0;
+	}
+}
+
+CALLBACK function OnlineStateChangedHandler(INTEGER state)
+{
+	if (state = 1)
+	{
+		onlineStatus = 1;
+	}
+	else
+	{
+		onlineStatus = 0;
+	}
+}
+
+
+CALLBACK function MqttConnectionStateChangedHandler(INTEGER state)
+{
+	mqttStatus = state;
+}
+
+Function main()
+{
+	WaitForInitializationComplete();
+	RegisterDelegate(client, PowerStateChanged, PowerStateChangedHandler);
+	RegisterDelegate(client, OnlineStateChanged, OnlineStateChangedHandler);
+	RegisterDelegate(client, MqttConnectionStateChanged, MqttConnectionStateChangedHandler);
+	client.InitAthomSwitch(mqttHost, mqttPort, username, password, mqttClientId, topic);
+	mqttStatus = 0;
+}
